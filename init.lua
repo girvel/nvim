@@ -46,6 +46,7 @@ require("lazy").setup({
   {"hrsh7th/cmp-vsnip"},
   {"hrsh7th/cmp-path"},
   {"hrsh7th/cmp-buffer"},
+  {"nvim-treesitter/nvim-treesitter"},
 })
 
 require("mason").setup({
@@ -113,6 +114,21 @@ cmp.setup({
     format = function(entry, item)
       return item
     end,
+  },
+})
+
+require("nvim-treesitter.configs").setup({
+  ensure_installed = { "lua", "rust", "toml" },
+  auto_install = true,
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = false,
+  },
+  ident = { enable = false },
+  rainbow = {
+    enable = true,
+    extended_mode = true,
+    max_file_lines = nil,
   },
 })
 
