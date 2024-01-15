@@ -21,6 +21,21 @@ vim.api.nvim_create_autocmd("FileType", {
   end
 })
 
+local function escape(str)
+  local escape_chars = [[;,."|\]]
+  return vim.fn.escape(str, escape_chars)
+end
+
+local en = [[`qwertyuiop[]asdfghjkl;'zxcvbnm]]
+local ru = [[ёйцукенгшщзхъфывапролджэячсмить]]
+local en_shift = [[~QWERTYUIOP{}ASDFGHJKL:"ZXCVBNM<>]]
+local ru_shift = [[ËЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ]]
+
+vim.opt.langmap = vim.fn.join({
+    escape(ru_shift) .. ';' .. escape(en_shift),
+    escape(ru) .. ';' .. escape(en),
+}, ',')
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -47,6 +62,9 @@ require("lazy").setup({
   {"hrsh7th/cmp-path"},
   {"hrsh7th/cmp-buffer"},
   {"nvim-treesitter/nvim-treesitter"},
+  {"Wansmer/langmapper.nvim", priority = 1, config = function()
+    require("langmapper").setup({})
+  end}
 })
 
 require("mason").setup({
@@ -132,3 +150,9 @@ require("nvim-treesitter.configs").setup({
   },
 })
 
+require("langmapper").automapping({ global = true, buffer = true })
+
+vim.keymap.set("n", ":й", ":q")
+vim.keymap.set("n", ":ц", ":w")
+vim.keymap.set("n", ":цй", ":wq")
+vim.keymap.set("n", ":!й", ":!q")
