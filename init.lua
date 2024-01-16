@@ -64,7 +64,8 @@ require("lazy").setup({
   {"nvim-treesitter/nvim-treesitter"},
   {"Wansmer/langmapper.nvim", priority = 1, config = function()
     require("langmapper").setup({})
-  end}
+  end},
+  {"nvim-tree/nvim-tree.lua"}
 })
 
 require("mason").setup({
@@ -156,3 +157,5 @@ vim.keymap.set("n", ":й", ":q")
 vim.keymap.set("n", ":ц", ":w")
 vim.keymap.set("n", ":цй", ":wq")
 vim.keymap.set("n", ":!й", ":!q")
+
+require("nvim-tree").setup({})
