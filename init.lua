@@ -1,5 +1,3 @@
--- PACKAGE MANAGER: LAZY --
-
 vim.wo.relativenumber = true
 
 vim.opt.tabstop = 4
@@ -37,6 +35,8 @@ vim.opt.langmap = vim.fn.join({
     escape(ru_shift) .. ';' .. escape(en_shift),
     escape(ru) .. ';' .. escape(en),
 }, ',')
+
+-- PACKAGE MANAGER: LAZY --
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -154,11 +154,14 @@ require("nvim-treesitter.configs").setup({
   },
 })
 
+
+require("nvim-tree").setup({})
+
+vim.keymap.set("n", "<C-t>", ":NvimTreeFocus<CR>")
+
 require("langmapper").automapping({ global = true, buffer = true })
 
 vim.keymap.set("n", ":й", ":q")
 vim.keymap.set("n", ":ц", ":w")
 vim.keymap.set("n", ":цй", ":wq")
 vim.keymap.set("n", ":!й", ":!q")
-
-require("nvim-tree").setup({})
