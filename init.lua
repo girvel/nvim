@@ -61,6 +61,7 @@ require("lazy").setup({
   {"hrsh7th/cmp-vsnip"},
   {"hrsh7th/cmp-path"},
   {"hrsh7th/cmp-buffer"},
+  {"hrsh7th/vim-vsnip"},
   {"nvim-treesitter/nvim-treesitter"},
   {"Wansmer/langmapper.nvim", priority = 1, config = function()
     require("langmapper").setup({})
