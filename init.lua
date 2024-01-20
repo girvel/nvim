@@ -21,6 +21,16 @@ vim.api.nvim_create_autocmd("FileType", {
   end
 })
 
+if vim.fn.has('wsl') == 1 then
+  vim.opt.clipboard = "unnamedplus"
+  vim.api.nvim_create_autocmd('TextYankPost', {
+    group = vim.api.nvim_create_augroup('Yank', { clear = true }),
+    callback = function()
+      vim.fn.system('clip.exe', vim.fn.getreg('"'))
+    end,
+  })
+end
+
 local function escape(str)
   local escape_chars = [[;,."|\]]
   return vim.fn.escape(str, escape_chars)
