@@ -22,13 +22,13 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 if vim.fn.has('wsl') == 1 then
-  vim.opt.clipboard = "unnamedplus"
-  vim.api.nvim_create_autocmd('TextYankPost', {
-    group = vim.api.nvim_create_augroup('Yank', { clear = true }),
-    callback = function()
-      vim.fn.system('clip.exe', vim.fn.getreg('"'))
-    end,
-  })
+  -- vim.opt.clipboard = "unnamedplus"
+  -- vim.api.nvim_create_autocmd('TextYankPost', {
+  --   group = vim.api.nvim_create_augroup('Yank', { clear = true }),
+  --   callback = function()
+  --     vim.fn.system('clip.exe', vim.fn.getreg('"'))
+  --   end,
+  -- })
 end
 
 local function escape(str)
@@ -65,7 +65,11 @@ require("lazy").setup({
   {"williamboman/mason.nvim"},
   {"williamboman/mason-lspconfig.nvim"},
   {"neovim/nvim-lspconfig"},
-  {"simrat39/rust-tools.nvim"},
+  {
+    "mrcjkb/rustaceanvim",
+    version = "^3",
+    ft = { "rust" }, 
+  },
   {"hrsh7th/nvim-cmp"},
   {"hrsh7th/cmp-nvim-lsp"},
   {"hrsh7th/cmp-nvim-lua"},
@@ -75,9 +79,9 @@ require("lazy").setup({
   {"hrsh7th/cmp-buffer"},
   {"hrsh7th/vim-vsnip"},
   {"nvim-treesitter/nvim-treesitter"},
-  {"Wansmer/langmapper.nvim", priority = 1, config = function()
-    require("langmapper").setup({})
-  end},
+--   {"Wansmer/langmapper.nvim", priority = 1, config = function()
+--     require("langmapper").setup({})
+--   end},
   {"nvim-tree/nvim-tree.lua"}
 })
 
@@ -92,18 +96,13 @@ require("mason").setup({
 })
 require("mason-lspconfig").setup()
 
-local rt = require("rust-tools")
-rt.setup({
-  server = {
-    on_attach = function(_, buffer)
-      vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = buffer })
-      vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = buffer })
-    end,
-  },
-})
+local v = function(x)
+  print(vim.inspect(x))
+  return x
+end
 
 local cmp = require("cmp")
-cmp.setup({
+cmp_config = {
   snippet = {
     expand = function(args)
       vim.fn["vsnip#anonymous"](args.body)
@@ -115,11 +114,13 @@ cmp.setup({
     ["<C-n>"] = cmp.mapping.select_next_item(),
     ["<S-Tab>"] = cmp.mapping.select_prev_item(),
     ["<Tab>"] = cmp.mapping.select_next_item(),
-
     ["<C-S-f>"] = cmp.mapping.scroll_docs(-4),
     ["<C-f>"] = cmp.mapping.scroll_docs(4),
-    ["<C-Space>"] = cmp.mapping.complete(),
-    ["<C-e>"] = cmp.mapping.close(),
+    ["<C-Space>"] = function(...)
+      print(vim.inspect {...})
+      return cmp.mapping.complete()(...)
+    end,
+    ["<C-e>"] = cmp.mapping.abort(),
     ["<CR>"] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Insert,
       select = true,
@@ -147,7 +148,9 @@ cmp.setup({
       return item
     end,
   },
-})
+}
+
+cmp.setup(cmp_config)
 
 require("nvim-treesitter.configs").setup({
   ensure_installed = { "lua", "rust", "toml" },
@@ -167,9 +170,9 @@ require("nvim-treesitter.configs").setup({
 
 require("nvim-tree").setup({})
 
-vim.keymap.set("n", "<C-t>", ":NvimTreeFocus<CR>")
+vim.keymap.set("n", "<C-T>", ":NvimTreeFocus<CR>")
 
-require("langmapper").automapping({ global = true, buffer = true })
+--require("langmapper").automapping({ global = true, buffer = true })
 
 vim.keymap.set("n", ":й", ":q")
 vim.keymap.set("n", ":ц", ":w")
