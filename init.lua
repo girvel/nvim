@@ -22,6 +22,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 if vim.fn.has('wsl') == 1 then
+  -- TODO integrate w/ windows clipboard
   -- vim.opt.clipboard = "unnamedplus"
   -- vim.api.nvim_create_autocmd('TextYankPost', {
   --   group = vim.api.nvim_create_augroup('Yank', { clear = true }),
@@ -79,11 +80,17 @@ require("lazy").setup({
   {"hrsh7th/cmp-buffer"},
   {"hrsh7th/vim-vsnip"},
   {"nvim-treesitter/nvim-treesitter"},
---   {"Wansmer/langmapper.nvim", priority = 1, config = function()
---     require("langmapper").setup({})
---   end},
-  {"nvim-tree/nvim-tree.lua"}
+  {"nvim-tree/nvim-tree.lua"},
+  {"catppuccin/nvim", name = "catppuccin", priority = 1000 },
 })
+
+if vim.fn.has("wsl") == 1 then
+  require("catppuccin").setup({
+    
+  })
+
+  vim.cmd.colorscheme("catppuccin")
+end
 
 require("mason").setup({
   ui = {
@@ -171,8 +178,6 @@ require("nvim-treesitter.configs").setup({
 require("nvim-tree").setup({})
 
 vim.keymap.set("n", "<C-T>", ":NvimTreeFocus<CR>")
-
---require("langmapper").automapping({ global = true, buffer = true })
 
 vim.keymap.set("n", ":й", ":q")
 vim.keymap.set("n", ":ц", ":w")
