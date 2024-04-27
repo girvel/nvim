@@ -103,13 +103,18 @@ require("mason").setup({
 })
 require("mason-lspconfig").setup()
 
-local v = function(x)
-  print(vim.inspect(x))
-  return x
-end
+require("lspconfig").lua_ls.setup({
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = {"vim"}
+      }
+    }
+  }
+})
 
 local cmp = require("cmp")
-cmp_config = {
+local cmp_config = {
   snippet = {
     expand = function(args)
       vim.fn["vsnip#anonymous"](args.body)
@@ -151,7 +156,7 @@ cmp_config = {
 
   formatting = {
     fields = {"menu", "abbr", "kind"},
-    format = function(entry, item)
+    format = function(_, item)
       return item
     end,
   },
@@ -173,7 +178,6 @@ require("nvim-treesitter.configs").setup({
     max_file_lines = nil,
   },
 })
-
 
 require("nvim-tree").setup({})
 
