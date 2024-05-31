@@ -69,7 +69,7 @@ require("lazy").setup({
   {
     "mrcjkb/rustaceanvim",
     version = "^3",
-    ft = { "rust" }, 
+    ft = { "rust" },
   },
   {"hrsh7th/nvim-cmp"},
   {"hrsh7th/cmp-nvim-lsp"},
@@ -86,7 +86,7 @@ require("lazy").setup({
 
 if vim.fn.has("wsl") == 1 then
   require("catppuccin").setup({
-    
+
   })
 
   vim.cmd.colorscheme("catppuccin")
@@ -182,6 +182,7 @@ require("nvim-treesitter.configs").setup({
 require("nvim-tree").setup({})
 
 vim.keymap.set("n", "<C-T>", ":NvimTreeFocus<CR>")
+vim.keymap.set("n", "<M-t>", ":NvimTreeRefresh<CR>")
 
 vim.keymap.set("n", ":й", ":q")
 vim.keymap.set("n", ":ц", ":w")

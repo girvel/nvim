@@ -1,0 +1,3 @@
+STUFF TO DO
+- ruler @ 120 characters
+- ligatures
