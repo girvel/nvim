@@ -11,6 +11,8 @@ vim.opt.autoindent = true
 vim.opt.smartindent = false
 vim.opt.cindent = false
 
+vim.g.mapleader = " "
+
 vim.cmd("filetype indent off")
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -83,6 +85,11 @@ require("lazy").setup({
   {"nvim-treesitter/nvim-treesitter"},
   {"nvim-tree/nvim-tree.lua"},
   {"catppuccin/nvim", name = "catppuccin", priority = 1000 },
+  {
+    "nvim-telescope/telescope.nvim",
+    tag = "0.1.6",
+    dependencies = { "nvim-lua/plenary.nvim" },
+  },
 })
 
 if vim.fn.has("wsl") == 1 then
@@ -182,10 +189,16 @@ require("nvim-treesitter.configs").setup({
 
 require("nvim-tree").setup({})
 
-vim.keymap.set("n", "<C-T>", ":NvimTreeFocus<CR>")
-vim.keymap.set("n", "<M-t>", ":NvimTreeRefresh<CR>")
+vim.keymap.set("n", "<leader>tf", ":NvimTreeFocus<CR>")
+vim.keymap.set("n", "<leader>tr", ":NvimTreeRefresh<CR>")
 
 vim.keymap.set("n", ":й", ":q")
 vim.keymap.set("n", ":ц", ":w")
 vim.keymap.set("n", ":цй", ":wq")
 vim.keymap.set("n", ":!й", ":!q")
+
+local builtin = require("telescope.builtin")
+vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
+vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
+vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
+vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})

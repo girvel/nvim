@@ -1,3 +1,4 @@
 STUFF TO DO
 - ruler @ 120 characters
 - ligatures
+- figure out how to work w/ multiple buffers
