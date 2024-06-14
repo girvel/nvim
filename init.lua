@@ -84,6 +84,7 @@ require("lazy").setup({
   {"hrsh7th/vim-vsnip"},
   {"nvim-treesitter/nvim-treesitter"},
   {"nvim-tree/nvim-tree.lua"},
+  {"nvim-tree/nvim-web-devicons"},
   {"catppuccin/nvim", name = "catppuccin", priority = 1000 },
   {
     "nvim-telescope/telescope.nvim",
@@ -100,15 +101,7 @@ if vim.fn.has("wsl") == 1 then
   vim.cmd.colorscheme("catppuccin")
 end
 
-require("mason").setup({
-  ui = {
-    icons = {
-      package_installed = "+",
-      package_pending = "~",
-      package_uninstalled = "-",
-    }
-  }
-})
+require("mason").setup()
 require("mason-lspconfig").setup()
 
 require("lspconfig").lua_ls.setup({
@@ -200,5 +193,6 @@ vim.keymap.set("n", ":!й", ":!q")
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
 vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
+vim.keymap.set("n", "<leader>fr", builtin.resume, {})
 vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
 vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
