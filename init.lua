@@ -128,8 +128,8 @@ local cmp_config = {
   mapping = {
     ["<C-p>"] = cmp.mapping.select_prev_item(),
     ["<C-n>"] = cmp.mapping.select_next_item(),
-    ["<S-Tab>"] = cmp.mapping.select_prev_item(),
-    ["<Tab>"] = cmp.mapping.select_next_item(),
+    ["<M-Up>"] = cmp.mapping.select_prev_item(),
+    ["<M-Down>"] = cmp.mapping.select_next_item(),
     ["<C-S-f>"] = cmp.mapping.scroll_docs(-4),
     ["<C-f>"] = cmp.mapping.scroll_docs(4),
     ["<C-Space>"] = function(...)
@@ -137,7 +137,7 @@ local cmp_config = {
       return cmp.mapping.complete()(...)
     end,
     ["<C-e>"] = cmp.mapping.abort(),
-    ["<CR>"] = cmp.mapping.confirm({
+    ["<Tab>"] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Insert,
       select = true,
     }),
@@ -199,3 +199,4 @@ vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
 vim.keymap.set("n", "<leader>fr", builtin.resume, {})
 vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
 vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
+vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, {})
