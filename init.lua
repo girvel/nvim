@@ -78,10 +78,8 @@ require("lazy").setup({
   {"hrsh7th/cmp-nvim-lsp"},
   {"hrsh7th/cmp-nvim-lua"},
   {"hrsh7th/cmp-nvim-lsp-signature-help"},
-  {"hrsh7th/cmp-vsnip"},
   {"hrsh7th/cmp-path"},
   {"hrsh7th/cmp-buffer"},
-  {"hrsh7th/vim-vsnip"},
   {"nvim-treesitter/nvim-treesitter"},
   {"nvim-tree/nvim-tree.lua"},
   {"nvim-tree/nvim-web-devicons"},
@@ -91,6 +89,8 @@ require("lazy").setup({
     tag = "0.1.6",
     dependencies = { "nvim-lua/plenary.nvim" },
   },
+  {"L3MON4D3/LuaSnip"},
+  {"saadparwaiz1/cmp_luasnip"},
 })
 
 if vim.fn.has("wsl") == 1 then
@@ -117,11 +117,27 @@ require("lspconfig").lua_ls.setup({
   }
 })
 
+local luasnip = require("luasnip")
+local snippet = luasnip.parser.parse_snipmate
+
+luasnip.add_snippets('lua', {
+  snippet(
+    'ef',
+    [[
+      function()
+        return Tablex.extend(
+          $0
+        )
+      end
+    ]]
+  ),
+})
+
 local cmp = require("cmp")
 local cmp_config = {
   snippet = {
     expand = function(args)
-      vim.fn["vsnip#anonymous"](args.body)
+      luasnip.lsp_expand(args.body)
     end,
   },
 
@@ -149,7 +165,7 @@ local cmp_config = {
     { name = "nvim_lsp_signature_help" },
     { name = "nvim_lua", keyword_length = 2 },
     { name = "buffer", keyword_length = 2 },
-    { name = "vsnip", keyword_length = 2 },
+    { name = "luasnip" },
     { name = "calc" },
   },
 
