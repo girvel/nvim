@@ -1,5 +1,5 @@
 STUFF TO DO
-- fucking forced autocomplete after punctuation fucks with `, + Enter`. Fix it or disable forced autocomplete in general
 - ruler @ 120 characters
-- ligatures
 - figure out how to work w/ multiple buffers
+- better function snippet
+- disable unused argument inspection
