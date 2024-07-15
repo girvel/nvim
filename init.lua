@@ -131,6 +131,19 @@ luasnip.add_snippets('lua', {
       end
     ]]
   ),
+  snippet(
+    "sc",
+    [[
+      {
+        name = "",
+        enabled = true,
+        start_predicate = function(self, rails, dt) return end,
+
+        run = function(self, rails, dt)
+        end,
+      },
+    ]]
+  ),
 })
 
 local cmp = require("cmp")
