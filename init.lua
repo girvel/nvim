@@ -144,13 +144,19 @@ luasnip.add_snippets('lua', {
       },
     ]]
   ),
+  snippet(
+    "fn",
+    [[
+      function($0) return end
+    ]]
+  ),
 })
 
 local cmp = require("cmp")
 local cmp_config = {
   snippet = {
     expand = function(args)
-      luasnip.lsp_expand(args.body)
+      luasnip.lsp_expan(args.body)
     end,
   },
 
@@ -161,10 +167,7 @@ local cmp_config = {
     ["<M-Down>"] = cmp.mapping.select_next_item(),
     ["<C-S-f>"] = cmp.mapping.scroll_docs(-4),
     ["<C-f>"] = cmp.mapping.scroll_docs(4),
-    ["<C-Space>"] = function(...)
-      print(vim.inspect {...})
-      return cmp.mapping.complete()(...)
-    end,
+    ["<C-Space>"] = cmp.mapping.complete(),
     ["<C-e>"] = cmp.mapping.abort(),
     ["<Tab>"] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Insert,
@@ -231,3 +234,5 @@ vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
 vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
 
 vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, {})
+
+vim.keymap.set("i", "<M-CR>", function() luasnip.jump(1) end, {silent = true})
