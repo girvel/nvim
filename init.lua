@@ -104,6 +104,10 @@ end
 require("mason").setup()
 require("mason-lspconfig").setup()
 
+local luasnip = require("luasnip")
+
+require("snippets")()
+
 require("lspconfig").lua_ls.setup({
   settings = {
     Lua = {
@@ -117,46 +121,11 @@ require("lspconfig").lua_ls.setup({
   }
 })
 
-local luasnip = require("luasnip")
-local snippet = luasnip.parser.parse_snipmate
-
-luasnip.add_snippets('lua', {
-  snippet(
-    'ef',
-    [[
-      function()
-        return Tablex.extend(
-          $0
-        )
-      end
-    ]]
-  ),
-  snippet(
-    "sc",
-    [[
-      {
-        name = "",
-        enabled = true,
-        start_predicate = function(self, rails, dt) return end,
-
-        run = function(self, rails, dt)
-        end,
-      },
-    ]]
-  ),
-  snippet(
-    "fn",
-    [[
-      function($0) return end
-    ]]
-  ),
-})
-
 local cmp = require("cmp")
 local cmp_config = {
   snippet = {
     expand = function(args)
-      luasnip.lsp_expan(args.body)
+      luasnip.lsp_expand(args.body)
     end,
   },
 
