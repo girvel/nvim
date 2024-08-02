@@ -22,6 +22,7 @@ return function()
           start_predicate = function(self, rails, dt) return $2 end,
 
           run = function(self, rails, dt)
+            self.enabled = false
             $0
           end,
         },
@@ -63,6 +64,28 @@ return function()
         do
           $1
         end$0
+      ]]
+    ),
+    snippet(
+      "ac",
+      [[
+        $1 = {
+          codename = "$1",
+          get_availability = function(self, entity)
+            return $2
+          end,
+          _run = function(self, entity)
+            $3
+          end,
+        }$0
+      ]]
+    ),
+    snippet(
+      "{",
+      [[
+        {
+          $1
+        }$0
       ]]
     ),
   })
