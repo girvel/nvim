@@ -194,6 +194,9 @@ vim.keymap.set("n", ":ц", ":w")
 vim.keymap.set("n", ":цй", ":wq")
 vim.keymap.set("n", ":!й", ":!q")
 
+vim.keymap.set("n", "<C-Left>", "<C-O>")
+vim.keymap.set("n", "<C-Right>", "<C-I>")
+
 local builtin = require("telescope.builtin")
 
 vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
