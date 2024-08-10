@@ -105,6 +105,7 @@ require("mason").setup()
 require("mason-lspconfig").setup()
 
 local luasnip = require("luasnip")
+require("luasnip.loaders.from_lua").load({paths = "./snippets"})
 
 require("snippets")()
 
