@@ -19,7 +19,9 @@ return function()
         {
           name = "$1",
           enabled = true,
-          start_predicate = function(self, rails, dt) return $2 end,
+          start_predicate = function(self, rails, dt)
+            return $2
+          end,
 
           run = function(self, rails, dt)
             self.enabled = false
