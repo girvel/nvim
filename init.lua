@@ -126,8 +126,7 @@ local cmp = require("cmp")
 local cmp_config = {
   snippet = {
     expand = function(args)
-      print(vim.inspect(args.body))
-      --luasnip.lsp_expand(args.body)
+      luasnip.lsp_expand(args.body)
     end,
   },
 
@@ -196,6 +195,8 @@ vim.keymap.set("n", ":ц", ":w")
 vim.keymap.set("n", ":цй", ":wq")
 vim.keymap.set("n", ":!й", ":!q")
 
+vim.keymap.set("n", ":W", ":w")
+
 vim.keymap.set("n", "<C-Left>", "<C-O>")
 vim.keymap.set("n", "<C-Right>", "<C-I>")
 
@@ -211,6 +212,10 @@ vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, {})
 
 vim.keymap.set("i", "<M-CR>", function() luasnip.jump(1) end, {silent = true})
 
-vim.keymap.set("i", "<C-r>", function()
+vim.keymap.set("i", "<M-o>", function()
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>ggO", true, false, true), "n", false)
+end, {remap = true})
+
+vim.keymap.set("n", "<M-o>", function()
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>ggO", true, false, true), "n", false)
 end, {remap = true})
