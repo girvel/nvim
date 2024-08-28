@@ -23,7 +23,7 @@ return function()
             return $2
           end,
 
-          run = function(self, rails, dt)
+          run = function(self, rails)
             self.enabled = false
             $0
           end,
