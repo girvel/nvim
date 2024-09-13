@@ -39,6 +39,14 @@ return {
     end,
   },
 
+  -- terminal pane
+  {
+    "akinsho/toggleterm.nvim",
+    config = function()
+      require("toggleterm").setup {}
+    end,
+  }
+
   -- fancy tabs
   -- {
   --   "akinsho/bufferline.nvim",

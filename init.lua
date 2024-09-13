@@ -181,7 +181,7 @@ vim.keymap.set("n", "<leader>fd", builtin.oldfiles, {})
 
 vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, {})
 
-vim.keymap.set("n", "<leader>cr", ":%luafile ~/.config/nvim/init.lua<CR>")
+--vim.keymap.set("n", "<leader>cr", ":%luafile ~/.config/nvim/init.lua<CR>")
 
 vim.keymap.set("i", "<M-CR>", function() luasnip.jump(1) end, {silent = true})
 
@@ -192,3 +192,13 @@ end, {remap = true})
 vim.keymap.set("n", "<M-o>", function()
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>ggO", true, false, true), "n", false)
 end, {remap = true})
+
+vim.keymap.set("n", "<leader>cf", ":ToggleTerm direction=float<CR>")
+vim.keymap.set("n", "<leader>cv", ":ToggleTerm direction=vertical size=80<CR>")
+vim.keymap.set("n", "<leader>ch", ":ToggleTerm direction=horizontal size=15<CR>")
+
+_G.set_terminal_keymaps = function()
+  vim.keymap.set("t", "<esc>", "<C-\\><C-n>")
+  vim.keymap.set('t', '<C-w>', "<C-\\><C-n><C-w>")
+end
+vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
