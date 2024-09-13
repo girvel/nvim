@@ -83,7 +83,8 @@ require("lazy").setup({
   {"nvim-treesitter/nvim-treesitter"},
   {"nvim-tree/nvim-tree.lua"},
   {"nvim-tree/nvim-web-devicons"},
-  {"catppuccin/nvim", name = "catppuccin", priority = 1000 },
+  --{"catppuccin/nvim", name = "catppuccin", priority = 1000 },
+  {"loctvl842/monokai-pro.nvim"},
   {
     "nvim-telescope/telescope.nvim",
     tag = "0.1.6",
@@ -94,11 +95,16 @@ require("lazy").setup({
 })
 
 if vim.fn.has("wsl") == 1 then
-  require("catppuccin").setup({
+  -- require("catppuccin").setup({
 
-  })
+  -- })
 
-  vim.cmd.colorscheme("catppuccin")
+  -- vim.cmd.colorscheme("catppuccin")
+
+  require("monokai-pro").setup {
+    filter = "spectrum",
+  }
+  vim.cmd.colorscheme("monokai-pro")
 end
 
 require("mason").setup()
