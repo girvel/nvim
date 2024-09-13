@@ -65,18 +65,9 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup("plugins")
-
-require("lualine").setup {
-  options = {
-    theme = "monokai-pro",
-  },
-}
-
-require("bufferline").setup {
-  options = {
-    separator_style = "slant",
-  },
+require("lazy").setup {
+  spec = {{import = "plugins"}},
+  change_detection = {enabled = false},
 }
 
 require("mason").setup()
