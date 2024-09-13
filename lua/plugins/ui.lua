@@ -50,7 +50,7 @@ return {
     config = function()
       require("toggleterm").setup {}
     end,
-  }
+  },
 
   -- fancy tabs
   -- {
