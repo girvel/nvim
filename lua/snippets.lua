@@ -7,7 +7,7 @@ return function()
       'ef',
       [[
         function()
-          return Tablex.extend(
+          return Table.extend(
             $0
           )
         end
