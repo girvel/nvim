@@ -1,3 +1,4 @@
 STUFF TO DO
 - disable unused argument inspection
 - git integration?
+- system clipboard keymap

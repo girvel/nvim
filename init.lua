@@ -1,33 +1,5 @@
 require("opt").run()
-
-if vim.fn.has('wsl') == 1 then
-  -- TODO integrate w/ windows clipboard
-  -- vim.opt.clipboard = "unnamedplus"
-  -- vim.api.nvim_create_autocmd('TextYankPost', {
-  --   group = vim.api.nvim_create_augroup('Yank', { clear = true }),
-  --   callback = function()
-  --     vim.fn.system('clip.exe', vim.fn.getreg('"'))
-  --   end,
-  -- })
-end
-
-local function escape(str)
-  local escape_chars = [[;,."|\]]
-  return vim.fn.escape(str, escape_chars)
-end
-
-local en = [[`qwertyuiop[]asdfghjkl;'zxcvbnm]]
-local ru = [[ёйцукенгшщзхъфывапролджэячсмить]]
-local en_shift = [[~QWERTYUIOP{}ASDFGHJKL:"ZXCVBNM<>]]
-local ru_shift = [[ËЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ]]
-
-vim.opt.langmap = vim.fn.join({
-    escape(ru_shift) .. ';' .. escape(en_shift),
-    escape(ru) .. ';' .. escape(en),
-}, ',')
-
--- PACKAGE MANAGER: LAZY --
-
+require("clipboard").run()
 require("package_manager").run()
 
 require("mason").setup()
@@ -52,7 +24,7 @@ require("lspconfig").lua_ls.setup({
 })
 
 local cmp = require("cmp")
-local cmp_config = {
+cmp.setup({
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
@@ -95,9 +67,7 @@ local cmp_config = {
       return item
     end,
   },
-}
-
-cmp.setup(cmp_config)
+})
 
 require("nvim-treesitter.configs").setup({
   ensure_installed = { "lua", "rust", "toml" },
@@ -115,50 +85,4 @@ require("nvim-treesitter.configs").setup({
 })
 
 require("nvim-tree").setup({})
-
-vim.keymap.set("n", "<leader>tf", ":NvimTreeFocus<CR>")
-vim.keymap.set("n", "<leader>tr", ":NvimTreeRefresh<CR>")
-
-vim.keymap.set("n", ":й", ":q")
-vim.keymap.set("n", ":ц", ":w")
-vim.keymap.set("n", ":цй", ":wq")
-vim.keymap.set("n", ":!й", ":!q")
-
-vim.keymap.set("n", ":W", ":w")
-
-vim.keymap.set("n", "<C-Left>", "<C-O>")
-vim.keymap.set("n", "<C-Right>", "<C-I>")
-
-local builtin = require("telescope.builtin")
-
-vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
-vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
-vim.keymap.set("n", "<leader>fr", builtin.resume, {})
-vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
-vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
-vim.keymap.set("n", "<leader>ft", builtin.treesitter, {})
-vim.keymap.set("n", "<leader>fd", builtin.oldfiles, {})
-
-vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, {})
-
---vim.keymap.set("n", "<leader>cr", ":%luafile ~/.config/nvim/init.lua<CR>")
-
-vim.keymap.set("i", "<M-CR>", function() luasnip.jump(1) end, {silent = true})
-
-vim.keymap.set("i", "<M-o>", function()
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>ggO", true, false, true), "n", false)
-end, {remap = true})
-
-vim.keymap.set("n", "<M-o>", function()
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>ggO", true, false, true), "n", false)
-end, {remap = true})
-
-vim.keymap.set("n", "<leader>cf", ":ToggleTerm direction=float<CR>")
-vim.keymap.set("n", "<leader>cv", ":ToggleTerm direction=vertical size=80<CR>")
-vim.keymap.set("n", "<leader>ch", ":ToggleTerm direction=horizontal size=15<CR>")
-
-_G.set_terminal_keymaps = function()
-  vim.keymap.set("t", "<esc>", "<C-\\><C-n>")
-  vim.keymap.set('t', '<C-w>', "<C-\\><C-n><C-w>")
-end
-vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
+require("keymap").run()
