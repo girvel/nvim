@@ -1,5 +1,5 @@
 STUFF TO DO
 - ruler @ 120 characters
 - figure out how to work w/ multiple buffers
-- better function snippet
 - disable unused argument inspection
+- git integration?

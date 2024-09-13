@@ -228,6 +228,8 @@ vim.keymap.set("n", "<leader>fd", builtin.oldfiles, {})
 
 vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, {})
 
+vim.keymap.set("n", "<leader>cr", ":%luafile ~/.config/nvim/init.lua<CR>")
+
 vim.keymap.set("i", "<M-CR>", function() luasnip.jump(1) end, {silent = true})
 
 vim.keymap.set("i", "<M-o>", function()
