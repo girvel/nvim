@@ -11,6 +11,8 @@ vim.opt.autoindent = true
 vim.opt.smartindent = false
 vim.opt.cindent = false
 
+vim.opt.termguicolors = true
+
 vim.g.mapleader = " "
 
 vim.cmd("filetype indent off")
