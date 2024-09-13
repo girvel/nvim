@@ -96,6 +96,7 @@ require("lazy").setup({
   },
   {"L3MON4D3/LuaSnip"},
   {"saadparwaiz1/cmp_luasnip"},
+  {"akinsho/bufferline.nvim", dependencies = "nvim-tree/nvim-web-devicons"},
 })
 
 if vim.fn.has("wsl") == 1 then
@@ -114,6 +115,12 @@ end
 require("lualine").setup {
   options = {
     theme = "monokai-pro",
+  },
+}
+
+require("bufferline").setup {
+  options = {
+    separator_style = "slant",
   },
 }
 
