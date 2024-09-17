@@ -100,5 +100,32 @@ return {
         ]]
       ),
     })
+
+    luasnip.add_snippets("c", {
+      snippet(
+        "{",
+        [[
+          {
+              $1
+          }$0
+        ]]
+      ),
+      snippet(
+        "(",
+        [[
+          (
+              $1
+          )$0
+        ]]
+      ),
+      snippet(
+        "for",
+        [[
+          for (size_t $1 = 0; $1 < $2; $1++) {
+              $3
+          }$0
+        ]]
+      ),
+    })
   end,
 }
