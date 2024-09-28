@@ -127,5 +127,24 @@ return {
         ]]
       ),
     })
+
+    luasnip.add_snippets("rust", {
+      snippet(
+        "{",
+        [[
+          {
+              $1
+          }$0
+        ]]
+      ),
+      snippet(
+        "(",
+        [[
+          (
+              $1
+          )$0
+        ]]
+      ),
+    })
   end,
 }
