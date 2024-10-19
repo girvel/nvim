@@ -34,8 +34,9 @@ return {
   },
   {
     "mrcjkb/rustaceanvim",
-    version = "^3",
+    version = "^5",
     ft = { "rust" },
+    lazy = false,
   },
   {
     "hrsh7th/nvim-cmp",
