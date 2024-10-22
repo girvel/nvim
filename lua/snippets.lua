@@ -32,6 +32,28 @@ return {
         ]]
       ),
       snippet(
+        "scc",
+        [[
+          {
+            name = "$1",
+            enabled = true,
+
+            characters = {
+              $2
+            },
+
+            start_predicate = function(self, rails, dt, c)
+              return $3
+            end,
+
+            run = function(self, rails, c)
+              self.enabled = false
+              $0
+            end,
+          },
+        ]]
+      ),
+      snippet(
         "fn",
         [[
           function($1) return $2 end$0
