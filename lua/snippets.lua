@@ -26,6 +26,7 @@ return {
 
             run = function(self, rails)
               self.enabled = false
+
               $0
             end,
           },
@@ -48,6 +49,7 @@ return {
 
             run = function(self, rails, c)
               self.enabled = false
+
               $0
             end,
           },
