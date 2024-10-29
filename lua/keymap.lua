@@ -29,6 +29,8 @@ return {
 
     -- lsp --
     vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, {})
+    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, {})
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
 
     -- luasnip --
     vim.keymap.set("i", "<M-CR>", function() luasnip.jump(1) end, {silent = true})

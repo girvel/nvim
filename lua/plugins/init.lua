@@ -14,7 +14,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     config = function()
-      lspconfig = require("lspconfig")
+      local lspconfig = require("lspconfig")
 
       lspconfig.lua_ls.setup({
         settings = {
@@ -30,6 +30,12 @@ return {
       })
 
       lspconfig.clangd.setup {}
+
+      -- lspconfig.rust_analyzer.setup {
+      --   settings = {
+      --     ['rust-analyzer'] = {},
+      --   },
+      -- }
     end,
   },
   {
@@ -37,6 +43,31 @@ return {
     version = "^5",
     ft = { "rust" },
     lazy = false,
+    config = function()
+      vim.g.rustaceanvim = {
+        -- Plugin configuration
+
+        tools = {
+        },
+        -- LSP configuration
+        server = {
+          on_attach = function(client, bufnr)
+
+            -- you can also put keymaps in here
+          end,
+          default_settings = {
+            -- rust-analyzer language server configuration
+            ['rust-analyzer'] = {
+            },
+          },
+
+        },
+
+        -- DAP configuration
+        dap = {
+        },
+      }
+    end,
   },
   {
     "hrsh7th/nvim-cmp",
