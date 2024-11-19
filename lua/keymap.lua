@@ -13,6 +13,8 @@ return {
       vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("ggO", true, false, true), "n", false)
     end, {remap = true})
 
+    -- vim.keymap.set("n", "<CR>", "za")
+
     -- nvim-tree --
     vim.keymap.set("n", "<leader>tf", ":NvimTreeFocus<CR>")
     vim.keymap.set("n", "<leader>tr", ":NvimTreeRefresh<CR>")

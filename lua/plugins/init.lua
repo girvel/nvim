@@ -23,8 +23,16 @@ return {
               version = "LuaJIT"
             },
             diagnostics = {
-              globals = {"vim", "love"}
-            }
+              globals = {"vim", "love"},
+              -- disable = {"unused-local"},
+            },
+            workspace = {
+              library = {
+                vim.env.VIMRUNTIME,
+                -- "~/Applications/lsp/lua-language-server/meta/3rd/love2d",
+                "${3rd}/love2d/library",
+              },
+            },
           }
         }
       })
@@ -142,6 +150,10 @@ return {
           max_file_lines = nil,
         },
       })
+
+      vim.wo.foldmethod = "expr"
+      vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+      vim.wo.foldlevel = 99
     end,
   },
   {

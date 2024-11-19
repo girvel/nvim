@@ -123,6 +123,22 @@ return {
           )$0
         ]]
       ),
+      snippet(
+        "[",
+        [[
+          [
+            $1
+          ]$0
+        ]]
+      ),
+      snippet(
+        "[[",
+        [=[
+          [[
+            $1
+          ]]$0
+        ]=]
+      ),
     })
 
     luasnip.add_snippets("c", {
@@ -152,6 +168,7 @@ return {
       ),
     })
 
+    -- TODO ([{ for all languages?
     luasnip.add_snippets("rust", {
       snippet(
         "{",
