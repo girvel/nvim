@@ -108,30 +108,6 @@ return {
         ]]
       ),
       snippet(
-        "{",
-        [[
-          {
-            $1
-          }$0
-        ]]
-      ),
-      snippet(
-        "(",
-        [[
-          (
-            $1
-          )$0
-        ]]
-      ),
-      snippet(
-        "[",
-        [[
-          [
-            $1
-          ]$0
-        ]]
-      ),
-      snippet(
         "[[",
         [=[
           [[
@@ -143,22 +119,6 @@ return {
 
     luasnip.add_snippets("c", {
       snippet(
-        "{",
-        [[
-          {
-              $1
-          }$0
-        ]]
-      ),
-      snippet(
-        "(",
-        [[
-          (
-              $1
-          )$0
-        ]]
-      ),
-      snippet(
         "for",
         [[
           for (size_t $1 = 0; $1 < $2; $1++) {
@@ -168,24 +128,31 @@ return {
       ),
     })
 
-    -- TODO ([{ for all languages?
-    luasnip.add_snippets("rust", {
-      snippet(
-        "{",
-        [[
+    for _, pair in ipairs({
+      {"rust", 4},
+      {"zig", 4},
+      {"c", 4},
+      {"lua", 2},
+    }) do
+      local language, tab_size = unpack(pair)
+      local tab = string.rep(" ", tab_size --[[@as integer]])
+      luasnip.add_snippets(language, {
+        snippet("{", ([[
           {
-              $1
+          %s$1
           }$0
-        ]]
-      ),
-      snippet(
-        "(",
-        [[
+        ]]):format(tab)),
+        snippet("(", ([[
           (
-              $1
+          %s$1
           )$0
-        ]]
-      ),
-    })
+        ]]):format(tab)),
+        snippet("[", ([[
+          [
+          %s$1
+          ]$0
+        ]]):format(tab)),
+      })
+    end
   end,
 }

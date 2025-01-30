@@ -1,7 +1,5 @@
 STUFF TO DO
-- disable unused argument inspection
-- system clipboard keymap
-- better understand the language-related tooling
 - submitting snippets with Tab
 - scrolling suggestions
 - sorting suggestions?
+- set current directory name as a title

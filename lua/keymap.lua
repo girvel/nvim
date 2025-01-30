@@ -28,6 +28,7 @@ return {
     vim.keymap.set("n", "<leader>ft", builtin.treesitter, {})
     vim.keymap.set("n", "<leader>fd", builtin.oldfiles, {})
     vim.keymap.set("n", "<leader>fn", ":Telescope notify<CR>", {})
+    vim.keymap.set('n', '<leader>fu', builtin.lsp_references, {})
 
     -- lsp --
     vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, {})

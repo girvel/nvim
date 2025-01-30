@@ -33,17 +33,19 @@ return {
                 "${3rd}/love2d/library",
               },
             },
+            misc = {
+              parameters = {"--loglevel=trace", "--logpath=/home/girvel/.lua-language-server/log"},
+            },
           }
         }
       })
 
       lspconfig.clangd.setup {}
 
-      -- lspconfig.rust_analyzer.setup {
-      --   settings = {
-      --     ['rust-analyzer'] = {},
-      --   },
-      -- }
+      lspconfig.zls.setup {}
+      vim.g.zig_fmt_autosave = 0
+
+      lspconfig.glsl_analyzer.setup {}
     end,
   },
   {
@@ -137,7 +139,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     config = function()
       require("nvim-treesitter.configs").setup({
-        ensure_installed = { "lua", "rust", "toml" },
+        ensure_installed = { "lua", "rust", "toml", "glsl" },
         auto_install = true,
         highlight = {
           enable = true,
@@ -154,6 +156,8 @@ return {
       vim.wo.foldmethod = "expr"
       vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
       vim.wo.foldlevel = 99
+
+      vim.treesitter.language.register("glsl", {"vert", "frag"})
     end,
   },
   {
