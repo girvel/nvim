@@ -132,6 +132,7 @@ return {
       {"rust", 4},
       {"zig", 4},
       {"c", 4},
+      {"glsl", 4},
       {"lua", 2},
     }) do
       local language, tab_size = unpack(pair)
