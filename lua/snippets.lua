@@ -134,6 +134,8 @@ return {
       {"c", 4},
       {"glsl", 4},
       {"lua", 2},
+      {"bash", 4},
+      {"zsh", 4},
     }) do
       local language, tab_size = unpack(pair)
       local tab = string.rep(" ", tab_size --[[@as integer]])
